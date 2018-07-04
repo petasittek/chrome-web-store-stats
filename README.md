@@ -3,7 +3,7 @@
 ## Run locally
     
     # setup environment
-    mkdir -p src/data/{config/metadata}
+    mkdir -p src/data/{config,metadata}
 
     # you can use an example config
     # you'll need to set the SMTP/StatsD credentials though
