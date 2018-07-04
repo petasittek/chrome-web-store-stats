@@ -1,35 +1,41 @@
 # Chrome Web Store Stats
 
-## Run in Docker
+## Run locally
+    
+    # setup environment
+    mkdir -p src/data/{config/metadata}
 
-### Preparation
+    # you can use an example config
+    # you'll need to set the SMTP/StatsD credentials though
+    cp example/config.js src/data/config/example.js
 
-Following directories/files are required.
+    # move to src dir
+    cd src
 
- - Config directory
- 
-        mkdir -p data/config
-        cp examples/config.js data/config/example.js
-        
- - Metadata directory
- 
-        mkdir -p data/metadata
- 
- - Crontab file
- 
-        cp examples/crontab data/crontab
+    # install deps
+    npm install
 
+    # run one of the following commands, e.g. from cmd or by cron
+    node index.js -c example.js --email
+    node index.js -c example.js --statsd
+    node index.js -c example.js --email --statsd
+    
 
-### Build and run
+## Run via Docker Compose
 
- - Build image
- 
-        docker-compose -p cws-stats build
+    # setup environment
+    mkdir -p data/{config,metadata}
 
- - (Re)create container
- 
-        docker-compose -p cws-stats up --no-start
+    # you can use an example config
+    # you'll need to set the SMTP/StatsD credentials though
+    cp examples/config.js data/config/example.js
 
- - Start container
- 
-        docker-compose -p cws-stats start
+    # create crontab file
+    cp examples/crontab data/crontab
+
+    # start container
+    docker-compose up [--detach]
+
+### Building custom Docker image
+
+If you want to build the image on your own, just replace `image: petasittek/chrome-web-store-stats` with `build: .` in `docker-compose.yml` and then run `docker-compose up --build [--detach]`.

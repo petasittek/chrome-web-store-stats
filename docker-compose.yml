@@ -2,13 +2,8 @@ version: "3.2"
 
 services:
   app:
-    build: .
+    image: petasittek/chrome-web-store-stats
     restart: always
-    # Apply crontab, run crond and wait
-    command: >
-      sh -c "crontab /app/crontab
-      && crond -l 0 -L /var/log/cron
-      && tail -f /dev/null"
     volumes:
       - ./data/crontab:/app/crontab
       - ./data/config:/app/config
