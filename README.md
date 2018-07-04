@@ -36,6 +36,6 @@
     # start container
     docker-compose up [--detach]
 
-### Building custom Docker image
+### Use custom Docker image
 
 If you want to build the image on your own, just replace `image: petasittek/chrome-web-store-stats` with `build: .` in `docker-compose.yml` and then run `docker-compose up --build [--detach]`.
