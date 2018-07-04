@@ -1,0 +1,8 @@
+# Chrome Web Store stats - email
+0   *   *   *   *   node /app/index.js -c example.js --email
+
+# Chrome Web Store stats - statsd
+0   *   *   *   *   node /app/index.js -c example.js --statsd
+
+# Chrome Web Store stats - email + statsd
+0   *   *   *   *   node /app/index.js -c example.js --email --statsd
