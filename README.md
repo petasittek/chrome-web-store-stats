@@ -34,7 +34,7 @@
     cp examples/crontab data/crontab
 
     # start container
-    docker-compose up [-p chrome-web-store-stats] [--detach]
+    docker-compose [-p chrome-web-store-stats] up [--detach]
 
 ### Use custom Docker image
 
