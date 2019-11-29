@@ -21,20 +21,17 @@ const push = (sdc, name, metric, value) => {
  * @param {Object} data
  */
 const send = (config, data) => {
-    const sdc = new statsdClient(config);
+    const sdc = new statsdClient(config.statsd);
 
     Object.keys(data).forEach(id => {
         const extension = data[id];
+        const slug = slugify(config.extensions[id]);
 
-        if (! extension.errorOccured) {
-            const name = slugify(extension.name.toLowerCase());
-
-            push(sdc, name, 'install-count', extension.installCount);
-            push(sdc, name, 'rating-count', extension.ratingCount);
-            push(sdc, name, 'rating-value', extension.ratingValue);
-            push(sdc, name, 'review-count', extension.reviewCount);
-            push(sdc, name, 'support-count', extension.supportCount);
-        }
+        push(sdc, slug, 'install-count', extension.installCount);
+        push(sdc, slug, 'rating-count', extension.ratingCount);
+        push(sdc, slug, 'rating-value', extension.ratingValue);
+        push(sdc, slug, 'review-count', extension.reviewCount);
+        push(sdc, slug, 'support-count', extension.supportCount);
     });
 };
 

@@ -24,7 +24,7 @@ let metadataCurrent = {};
 let promises = [];
 
 // Build new metadata file
-for (const extensionId of config.ids) {
+for (const extensionId of Object.keys(config.extensions)) {
     metadataCurrent[extensionId] = metadataCurrent[extensionId] || {};
     metadataSaved[extensionId] = metadataSaved[extensionId] || {};
 
@@ -40,7 +40,7 @@ Promise.all(promises)
         if (argv.email) {
             fs.writeFileSync(metadataFilePath, JSON.stringify(metadataCurrent, null, 2));
 
-            const html = htmlBuilder.build(config.ids, metadataCurrent);
+            const html = htmlBuilder.build(config.extensions, metadataCurrent);
             const data = {...config.email.headers, ...{ text: html, html: html }};
 
             email.send(config.email.smtp, data);
@@ -48,6 +48,6 @@ Promise.all(promises)
 
         // Sent to statsd
         if (argv.statsd) {
-            statsd.send(config.statsd, metadataCurrent);
+            statsd.send(config, metadataCurrent);
         }
     });

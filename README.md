@@ -34,8 +34,4 @@
     cp examples/crontab data/crontab
 
     # start container
-    docker-compose [-p chrome-web-store-stats] up [--detach]
-
-### Use custom Docker image
-
-If you want to build the image on your own, just replace `image: petasittek/chrome-web-store-stats` with `build: .` in `docker-compose.yml` and then run `docker-compose up --build [--detach]`.
+    docker-compose [-p chrome-web-store-stats] up [--build] [--detach]

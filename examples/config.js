@@ -18,10 +18,10 @@ const config = {
         port: '8125',
         prefix: 'chrome-web-store',
     },
-    ids: [
-        'mgijmajocgfcbeboacabfgobmjgjcoja', // Google Dictionary (by Google)
-        'aapbdbdomjkkjkaonfhkkikfgjllcleb', // Google Translate
-    ],
+    extensions: {
+        'mgijmajocgfcbeboacabfgobmjgjcoja': 'Google Dictionary (by Google)',
+        'aapbdbdomjkkjkaonfhkkikfgjllcleb': 'Google Translate',
+    },
 };
 
 module.exports = config;

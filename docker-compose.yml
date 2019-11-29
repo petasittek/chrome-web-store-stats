@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   app:
-    image: petasittek/chrome-web-store-stats
+    build: .
     restart: always
     volumes:
       - ./data/crontab:/app/crontab

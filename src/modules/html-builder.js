@@ -5,12 +5,12 @@ const CLASS_DIFF_MINUS = 'item_diff--minus';
 /**
  * Build HTML for email
  *
- * @param {Array} extensionIds
+ * @param {Object} extensions
  * @param {Object} metadata
  *
  * @returns {string}
  */
-const build = (extensionIds, metadata) => {
+const build = (extensions, metadata) => {
     let html = `
                 <html>
                     <head>
@@ -72,107 +72,110 @@ const build = (extensionIds, metadata) => {
                                 <td>Support count</td> 
                             </tr>`;
 
-    for (const extensionId of extensionIds) {
+    for (const extensionId of Object.keys(extensions)) {
+        let name = extensions[extensionId];
         let installCountDiffClass = CLASS_DIFF_ZERO;
-        if (metadata[extensionId].installCountDiff > 0) {
-            metadata[extensionId].installCountDiff = `+${metadata[extensionId].installCountDiff}`;
+        let extensionMetadata = metadata[extensionId];
+
+        if (extensionMetadata.installCountDiff > 0) {
+            extensionMetadata.installCountDiff = `+${extensionMetadata.installCountDiff}`;
             installCountDiffClass = CLASS_DIFF_PLUS;
-        } else if (metadata[extensionId].installCountDiff < 0) {
+        } else if (extensionMetadata.installCountDiff < 0) {
             installCountDiffClass = CLASS_DIFF_MINUS;
         }
 
         let ratingCountDiffClass = CLASS_DIFF_ZERO;
-        if (metadata[extensionId].ratingCountDiff > 0) {
-            metadata[extensionId].ratingCountDiff = `+${metadata[extensionId].ratingCountDiff}`;
+        if (extensionMetadata.ratingCountDiff > 0) {
+            extensionMetadata.ratingCountDiff = `+${extensionMetadata.ratingCountDiff}`;
             ratingCountDiffClass = CLASS_DIFF_PLUS;
-        } else if (metadata[extensionId].ratingCountDiff < 0) {
+        } else if (extensionMetadata.ratingCountDiff < 0) {
             ratingCountDiffClass = CLASS_DIFF_MINUS;
         }
 
         let ratingValueDiffClass = CLASS_DIFF_ZERO;
-        metadata[extensionId].ratingValueDiff = metadata[extensionId].ratingValueDiff.toFixed(2);
-        if (metadata[extensionId].ratingValueDiff > 0) {
-            metadata[extensionId].ratingValueDiff = `+${metadata[extensionId].ratingValueDiff}`;
+        extensionMetadata.ratingValueDiff = extensionMetadata.ratingValueDiff.toFixed(2);
+        if (extensionMetadata.ratingValueDiff > 0) {
+            extensionMetadata.ratingValueDiff = `+${extensionMetadata.ratingValueDiff}`;
             ratingValueDiffClass = CLASS_DIFF_PLUS;
-        } else if (metadata[extensionId].ratingValueDiff < 0) {
+        } else if (extensionMetadata.ratingValueDiff < 0) {
             ratingValueDiffClass = CLASS_DIFF_MINUS;
         }
 
         let reviewCountDiffClass = CLASS_DIFF_ZERO;
-        if (metadata[extensionId].reviewCountDiff > 0) {
-            metadata[extensionId].reviewCountDiff = `+${metadata[extensionId].reviewCountDiff}`;
+        if (extensionMetadata.reviewCountDiff > 0) {
+            extensionMetadata.reviewCountDiff = `+${extensionMetadata.reviewCountDiff}`;
             reviewCountDiffClass = CLASS_DIFF_PLUS;
-        } else if (metadata[extensionId].reviewCountDiff < 0) {
+        } else if (extensionMetadata.reviewCountDiff < 0) {
             reviewCountDiffClass = CLASS_DIFF_MINUS;
         }
 
 
         let supportCountDiffClass = CLASS_DIFF_ZERO;
-        if (metadata[extensionId].supportCountDiff > 0) {
-            metadata[extensionId].supportCountDiff = `+${metadata[extensionId].supportCountDiff}`;
+        if (extensionMetadata.supportCountDiff > 0) {
+            extensionMetadata.supportCountDiff = `+${extensionMetadata.supportCountDiff}`;
             supportCountDiffClass = CLASS_DIFF_PLUS;
-        } else if (metadata[extensionId].supportCountDiff < 0) {
+        } else if (extensionMetadata.supportCountDiff < 0) {
             supportCountDiffClass = CLASS_DIFF_MINUS;
         }
 
         html += `<tr class="item">
-                    <td class="item__name ${metadata[extensionId].errorOccured ? 'item__name--error' : ''}">
-                        <a class="item__link item__link--blue" target="_blank" href="${metadata[extensionId].url}">
-                            ${metadata[extensionId].name}
+                    <td class="item__name ${extensionMetadata.errorOccured ? 'item__name--error' : ''}">
+                        <a class="item__link item__link--blue" target="_blank" href="${extensionMetadata.url}">
+                            ${name}
                         </a>
-                        ${metadata[extensionId].errorOccured ? '<br>Error ' + metadata[extensionId].errorType : ''}
+                        ${extensionMetadata.errorOccured ? '<br>Error ' + extensionMetadata.errorType : ''}
                     </td>
                     
                     <td>
                         <span class="item_number">
-                            ${metadata[extensionId].installCount}
+                            ${extensionMetadata.installCount}
                         </span>
                         <br>
                         <span class="item_diff ${installCountDiffClass}">
-                            ${metadata[extensionId].installCountDiff}
+                            ${extensionMetadata.installCountDiff}
                         </span>
                     </td>
                     
                     <td>
                         <span class="item_number">
-                            ${metadata[extensionId].ratingCount}
+                            ${extensionMetadata.ratingCount}
                         </span>
                         <br>
                         <span class="item_diff ${ratingCountDiffClass}">
-                            ${metadata[extensionId].ratingCountDiff}
+                            ${extensionMetadata.ratingCountDiff}
                         </span>
                     </td>
                     
                     <td>
                         <span class="item_number">
-                            ${metadata[extensionId].ratingValue.toFixed(2)}
+                            ${extensionMetadata.ratingValue.toFixed(2)}
                         </span>
                         <br>
                         <span class="item_diff ${ratingValueDiffClass}">
-                            ${metadata[extensionId].ratingValueDiff}
+                            ${extensionMetadata.ratingValueDiff}
                         </span>
                     </td>
                     
                     <td>
-                        <a class="item__link" target="_blank" href="${metadata[extensionId].urlReviews}">
+                        <a class="item__link" target="_blank" href="${extensionMetadata.urlReviews}">
                             <span class="item_number">
-                                ${metadata[extensionId].reviewCount}
+                                ${extensionMetadata.reviewCount}
                             </span>
                             <br>
                             <span class="item_diff ${reviewCountDiffClass}">
-                                ${metadata[extensionId].reviewCountDiff}
+                                ${extensionMetadata.reviewCountDiff}
                             </span>
                         </a>
                     </td>
                     
                     <td>
-                        <a class="item__link" target="_blank" href="${metadata[extensionId].urlSupport}">
+                        <a class="item__link" target="_blank" href="${extensionMetadata.urlSupport}">
                             <span class="item_number">
-                                ${metadata[extensionId].supportCount}
+                                ${extensionMetadata.supportCount}
                             </span>
                             <br>
                             <span class="item_diff ${supportCountDiffClass}">
-                                ${metadata[extensionId].supportCountDiff}
+                                ${extensionMetadata.supportCountDiff}
                             </span>
                         </td>
                     </a>
