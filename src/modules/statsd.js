@@ -25,7 +25,7 @@ const send = (config, data) => {
 
     Object.keys(data).forEach(id => {
         const extension = data[id];
-        const slug = slugify(config.extensions[id]);
+        const slug = slugify(config.extensions[id]).toLowerCase();
 
         push(sdc, slug, 'install-count', extension.installCount);
         push(sdc, slug, 'rating-count', extension.ratingCount);
