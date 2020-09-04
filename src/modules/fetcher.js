@@ -5,8 +5,8 @@ const URL_USER_GENERATED_DATA = 'https://chrome.google.com/reviews/components';
 
 const REGEX_NAME = '<meta itemprop="name" content="([^"]*)"/>';
 const REGEX_INSTALL_COUNT = '<Attribute name="user_count">([0-9]*)</Attribute>';
-const REGEX_RATING_COUNT = '<meta itemprop="ratingCount" content="([0-9]*)"/>';
-const REGEX_RATING_VALUE = '<meta itemprop="ratingValue" content="([0-9.]*)"/>';
+const REGEX_RATING_COUNT = new RegExp('">\\(([0-9]*)\\)</span>');
+const REGEX_RATING_VALUE = new RegExp(': ([0-9.]*) \\(');
 const REGEX_REVIEW_COUNT = '"numAnnotations":([0-9]*),';
 const REGEX_SUPPORT_COUNT = '"numAnnotations":([0-9]*),';
 
