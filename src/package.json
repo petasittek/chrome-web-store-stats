@@ -2,7 +2,7 @@
   "license" : "MIT",
   "dependencies": {
     "minimist": "^1.2.0",
-    "nodemailer": "^4.0.1",
+    "nodemailer": "^6.6.3",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4",
     "slug": "^0.9.1",
