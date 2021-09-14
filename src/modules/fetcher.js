@@ -14,6 +14,9 @@ const ERROR_LOADING_BASE = 0;
 const ERROR_LOADING_REVIEW = 1;
 const ERROR_LOADING_SUPPORT = 2;
 
+// Mobile user agent to avoid consent screen
+const USER_AGENT = 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/92.0.4515.159 Mobile/15E148 Safari/604.1';
+
 /**
  * Get install count, rating count and rating value and their diffs
  *
@@ -28,6 +31,9 @@ const getDataBase = (extensionId, metadataCurrent, metadataSaved) => {
     const options = {
         method: 'GET',
         uri: url,
+        headers: {
+            'User-Agent': USER_AGENT,
+        },
     };
 
     // Constant values
@@ -96,6 +102,9 @@ const getDataReview = (extensionId, metadataCurrent, metadataSaved) => {
         method: 'POST',
         uri: `${URL_USER_GENERATED_DATA}`,
         body: `req=${JSON.stringify(jsonBody)}`,
+        headers: {
+            'User-Agent': USER_AGENT,
+        },
     };
 
     return rp(options)
@@ -139,6 +148,9 @@ const getDataSupport = (extensionId, metadataCurrent, metadataSaved) => {
         method: 'POST',
         uri: `${URL_USER_GENERATED_DATA}`,
         body: `req=${JSON.stringify(jsonBody)}`,
+        headers: {
+            'User-Agent': USER_AGENT,
+        },
     };
 
     return rp(options)

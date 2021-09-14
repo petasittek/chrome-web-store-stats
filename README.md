@@ -1,5 +1,6 @@
 # Chrome Web Store Stats
 
+
 ## Run locally
     
     # setup environment
@@ -33,5 +34,14 @@
     # create crontab file
     cp examples/crontab data/crontab
 
+
+### Run via crontab
+
     # start container
     docker-compose [-p chrome-web-store-stats] up [--build] [--detach]
+
+
+### Run specific command
+
+    # run command
+    docker-compose run --entrypoint="node /app/index.js -c example.js --email" app
