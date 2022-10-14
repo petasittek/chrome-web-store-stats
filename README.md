@@ -1,6 +1,13 @@
 # Chrome Web Store Stats
 
 
+## TODO
+
+- Get rid of cron inside container, run via OS cron
+  - Delete `CMD` from Dockerfile
+  - `docker-compose run app node /app/index.js -c example.js --email`
+
+
 ## Run locally
     
     # setup environment
